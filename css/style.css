@@ -1,0 +1,181 @@
+/* GLOBAL */
+body {
+    background: #f5f7fb;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* LOGIN PAGE */
+.login-container {
+    height: 100vh;
+}
+
+.login-left {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    text-align: center;
+    padding: 40px;
+    color: white;
+}
+
+.login-card {
+    width: 350px;
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.login-card h3 {
+    font-weight: 600;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background: linear-gradient(180deg, #667eea, #764ba2);
+    position: fixed;
+    color: white;
+}
+
+.sidebar h4 {
+    font-weight: 600;
+}
+
+.sidebar .nav-link {
+    color: rgba(255,255,255,0.8);
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+.sidebar .nav-link i {
+    margin-right: 8px;
+}
+
+.sidebar .nav-link:hover {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+}
+
+.sidebar .nav-link.active {
+    background: rgba(255,255,255,0.3);
+    color: #fff;
+}
+
+/* MAIN CONTENT */
+.main-content {
+    margin-left: 240px;
+    background: #f5f7fb;
+    min-height: 100vh;
+}
+
+/* MODERN CARDS */
+.modern-card {
+    border: none;
+    border-radius: 15px;
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+/* STAT CARDS */
+.stat-card {
+    border: none;
+    border-radius: 15px;
+    padding: 20px;
+    color: white;
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card.success {
+    background: linear-gradient(135deg, #43e97b, #38f9d7);
+}
+
+.stat-card.warning {
+    background: linear-gradient(135deg, #f7971e, #ffd200);
+}
+
+.stat-card.danger {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+}
+
+.stat-card h6 {
+    opacity: 0.9;
+}
+
+.stat-card h2 {
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+/* TABLE */
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table thead {
+    background: #f1f3f6;
+}
+
+.table tbody tr:hover {
+    background: #f9fafc;
+    transition: 0.2s;
+}
+
+/* BUTTON IMPROVEMENTS */
+.btn {
+    border-radius: 10px;
+}
+
+.btn-light {
+    background: white;
+    border: none;
+}
+
+.btn-light:hover {
+    background: #f1f1f1;
+}
+
+/* SEARCH BAR */
+.search-input {
+    border-radius: 10px;
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+.search-input:focus {
+    box-shadow: none;
+    border-color: #667eea;
+}
+
+/* TABLE ACTION BUTTONS */
+.table .btn {
+    border-radius: 8px;
+    padding: 5px 10px;
+}
+
+/* ADD BUTTON */
+.btn-primary {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border: none;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+}
+
+.table .btn-outline-primary:hover {
+    background: #667eea;
+    color: white;
+}
+
+.table .btn-outline-danger:hover {
+    background: #ff4b2b;
+    color: white;
+}

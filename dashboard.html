@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Student System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .stat-card {
+            border-radius: 16px;
+            transition: 0.3s;
+            border: none;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="d-flex">
+    <div class="sidebar">
+        <h4 class="text-white text-center mt-4 fw-bold">
+            <i class="bi bi-mortarboard-fill me-2"></i>
+            Student System
+        </h4>
+        <ul class="nav flex-column mt-4">
+            <li class="nav-item">
+                <a class="nav-link active" href="dashboard.html">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="students.html">
+                    <i class="bi bi-people"></i> Students
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="notifications.html">
+                    <i class="bi bi-bell"></i> Notifications
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contacts.html">
+                    <i class="bi bi-person-lines-fill"></i> Contacts
+                </a>
+            </li>
+            <li class="nav-item mt-4 px-3">
+                <button class="btn btn-outline-light w-100 mb-2" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+    <i class="bi bi-key-fill me-2"></i> Change Password
+</button>
+                <button class="btn btn-danger w-100 rounded-pill" onclick="logout()">
+                    <i class="bi bi-box-arrow-right me-2"></i> Logout
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-content p-4 w-100">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="fw-bold mb-1">Dashboard Overview</h2>
+                <p class="text-muted mb-0">Real-time system administration metrics</p>
+            </div>
+        </div>
+
+        <div class="row g-4 mb-4">
+            <div class="col-md-3">
+                <div class="card stat-card shadow-sm p-3 bg-white">
+                    <div class="d-flex align-items-center">
+                        <div class="p-3 bg-primary-subtle text-primary rounded-3 me-3">
+                            <i class="bi bi-people-fill fs-4"></i>
+                        </div>
+                        <div>
+                            <h6 class="text-muted small mb-1">Total Students</h6>
+                            <h4 class="fw-bold mb-0" id="totalStudents">--</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card shadow-sm p-3 bg-white">
+                    <div class="d-flex align-items-center">
+                        <div class="p-3 bg-success-subtle text-success rounded-3 me-3">
+                            <i class="bi bi-book-half fs-4"></i>
+                        </div>
+                        <div>
+                            <h6 class="text-muted small mb-1">Active Courses</h6>
+                            <h4 class="fw-bold mb-0" id="totalCourses">--</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card shadow-sm p-3 bg-white">
+                    <div class="d-flex align-items-center">
+                        <div class="p-3 bg-info-subtle text-info rounded-3 me-3">
+                            <i class="bi bi-building fs-4"></i>
+                        </div>
+                        <div>
+                            <h6 class="text-muted small mb-1">Semesters</h6>
+                            <h4 class="fw-bold mb-0" id="totalDepartments">--</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card shadow-sm p-3 bg-white">
+                    <div class="d-flex align-items-center">
+                        <div class="p-3 bg-warning-subtle text-warning rounded-3 me-3">
+                            <i class="bi bi-shield-lock-fill fs-4"></i>
+                        </div>
+                        <div>
+                            <h6 class="text-muted small mb-1">Active Sessions</h6>
+                            <h4 class="fw-bold mb-0" id="activeUsers">--</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-7">
+                <div class="card border-0 shadow-sm p-4 rounded-4 h-100">
+                    <h5 class="fw-bold mb-3"><i class="bi bi-clock-history text-secondary me-2"></i>Recently Added Students</h5>
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Course</th>
+                                    <th>Sem</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentStudents">
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted py-3">Loading records...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="card border-0 shadow-sm p-4 rounded-4 h-100">
+                    <h5 class="fw-bold mb-3"><i class="bi bi-graph-up text-primary me-2"></i>Students per Course</h5>
+                    <div style="position: relative; height: 250px; width: 100%;">
+                        <canvas id="attendanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/dashboard.js"></script>
+
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title"><i class="bi bi-shield-lock me-2"></i>Change Admin Password</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div id="passwordAlert" class="alert alert-danger" style="display: none;"></div>
+                <form id="changePasswordForm">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Current Password</label>
+                        <input type="password" id="oldPassword" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">New Password</label>
+                        <input type="password" id="newPassword" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Confirm New Password</label>
+                        <input type="password" id="confirmPassword" class="form-control" required>
+                    </div>
+                    <button type="submit" id="btnUpdatePwd" class="btn btn-primary w-100 fw-bold">Update Password</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="manageStudentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title"><i class="bi bi-person-gear me-2"></i>Manage Student: <span id="manageStudentName" class="fw-bold"></span></h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <input type="hidden" id="manageStudentId">
+
+                <ul class="nav nav-tabs nav-fill bg-light pt-2" id="manageTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active fw-bold" id="subject-tab" data-bs-toggle="tab" data-bs-target="#subject-pane" type="button" role="tab">📚 Add Subject</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link fw-bold" id="attendance-tab" data-bs-toggle="tab" data-bs-target="#attendance-pane" type="button" role="tab">✅ Update Attendance</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link fw-bold" id="fee-tab" data-bs-toggle="tab" data-bs-target="#fee-pane" type="button" role="tab">💳 Generate Fee</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content p-4" id="manageTabsContent">
+                    
+                    <div class="tab-pane fade show active" id="subject-pane" role="tabpanel">
+                        <form id="addSubjectForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Subject Name</label>
+                                    <input type="text" id="subjectName" class="form-control" placeholder="e.g. Machine Learning" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Faculty Name</label>
+                                    <input type="text" id="facultyName" class="form-control" placeholder="e.g. Dr. Andrew" required>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn btn-primary w-100 fw-bold">Assign Subject</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="tab-pane fade" id="attendance-pane" role="tabpanel">
+                        <form id="updateAttendanceForm">
+                            <div class="row g-3">
+                                <div class="col-md-12">
+                                    <label class="form-label fw-bold">Overall Attendance Percentage (%)</label>
+                                    <input type="number" id="attendancePercent" class="form-control form-control-lg text-center" min="0" max="100" placeholder="85" required>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn btn-success w-100 fw-bold">Save Attendance</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="tab-pane fade" id="fee-pane" role="tabpanel">
+                        <form id="addFeeForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Fee Description</label>
+                                    <input type="text" id="feeDesc" class="form-control" placeholder="e.g. Library Fine" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Amount (₹)</label>
+                                    <input type="number" id="feeAmount" class="form-control" placeholder="500" required>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label fw-bold">Status</label>
+                                    <select id="feeStatus" class="form-select" required>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Paid">Paid</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn btn-danger w-100 fw-bold">Generate Invoice</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
